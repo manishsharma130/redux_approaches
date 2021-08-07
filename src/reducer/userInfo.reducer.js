@@ -1,5 +1,11 @@
 const actiontypes = require("./userInfo.types");
 const redux = require("redux");
+const { createReducer } = require("./createReducer");
+
+/**
+ * Using this "createReducer" function we can scale each slice of reducer easily
+ */
+
 
 /**
  * 
@@ -9,38 +15,40 @@ const redux = require("redux");
  * 
  */
 
-function userInfoNameReducer(state={},action={}){
-   switch(action.type){
-     case actiontypes.SET_USER_NAME:
-      return (action.data||"");
-     case actiontypes.SET_USER_RESET:
-      return ("");
-     default:
-      return (state);    
-  }
-}
 
-function userInfoEmailReducer(state={},action={}){
-    switch(action.type){
-        case actiontypes.SET_USER_EMAIL:
-         return (action.data||"");
-        case actiontypes.SET_USER_RESET:
-         return ("");
-        default:
-         return (state);    
-     }
-}
+const initialStateName = "";
 
-function userInfoAddressReducer(state={},action={}){
-    switch(action.type){
-        case actiontypes.SET_USER_ADDRESS:
-         return (action.data||"");
-        case actiontypes.SET_USER_RESET:
-         return ("");
-        default:
-         return (state);    
-     }
-}
+const userInfoNameReducer = createReducer(initialStateName,{
+    [actiontypes.SET_USER_NAME]:(state,action)=>{
+       return (action.data||"");
+    },
+    [actiontypes.SET_USER_RESET]:(state,action)=>{
+      return "";
+    }
+});
+
+const initialStateEmail = "";
+const userInfoEmailReducer = createReducer(initialStateEmail,{
+    [actiontypes.SET_USER_EMAIL]:(state,action)=>{
+        return (action.data||"");
+    },
+    [actiontypes.SET_USER_RESET]:(state,action)=>{
+        return (action.data||"");
+    }
+});
+
+
+const initialStateAddress = "";
+
+const userInfoAddressReducer = createReducer(initialStateAddress,{
+    [actiontypes.SET_USER_ADDRESS]:(state,action)=>{
+        return (action.data||"");
+    },
+    [actiontypes.SET_USER_RESET]:(state,action)=>{
+        return ("");
+    }
+});
+
 
 
 /**
