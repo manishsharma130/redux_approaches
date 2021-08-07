@@ -1,9 +1,10 @@
 const actiontypes = require("./userInfo.types");
-
+const redux = require("redux");
 
 /**
  * 
- * In order to clear reducer that is divided into multiple section so we need to keep one reset kind type in each and every
+ * In order to clear reducer that is divided into multiple section 
+ * so we need to keep one reset kind type in each and every
  * divided reducer.
  * 
  */
@@ -42,11 +43,23 @@ function userInfoAddressReducer(state={},action={}){
 }
 
 
+/**
+ * As We can see below code we devide the reuder into samll piece in order to make scalable
+ */
+// module.exports = (state={},action={})=>{
+//     return ({
+//         userName:userInfoNameReducer(state?.userName||"",action),
+//         userAddress:userInfoAddressReducer(state?.userAddress||"",action),
+//         userEmail:userInfoEmailReducer(state?.userEmail||"",action)
+//     });
+// }
 
-module.exports = (state={},action={})=>{
-    return ({
-        userName:userInfoNameReducer(state?.userName||"",action),
-        userAddress:userInfoAddressReducer(state?.userAddress||"",action),
-        userEmail:userInfoEmailReducer(state?.userEmail||"",action)
-    });
-}
+/**
+ * As we can see above code the same redux provide utility for this ,
+ * this is nothing but combineReducer
+ */
+module.exports = redux.combineReducers({
+    userName:userInfoNameReducer,
+    userAddress:userInfoAddressReducer,
+    userEmail:userInfoEmailReducer
+});
