@@ -6,11 +6,12 @@ const reducer = require("./userInfo.reducer");
 const { logger } = require("../enhancer/reduxLogger");
 
 const { customMiddleware } = require("../enhancer/middlewareLogger");
+const { thunkMiddleware } = require("../enhancer/asyncMiddleware");
 
 /**
  * Here below line of code is used to add middleware
  */
-const addedmiddleware = redux.applyMiddleware(customMiddleware);
+const addedmiddleware = redux.applyMiddleware(customMiddleware,thunkMiddleware);
 
 
 /**
